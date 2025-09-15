@@ -1,4 +1,20 @@
 import streamlit as st
+import spacy
+import en_core_web_sm
+
+# Load NLP model
+nlp = en_core_web_sm.load()
+
+st.title("AI Resume Screener 🚀")
+
+text = st.text_area("Paste your resume text here:")
+
+if st.button("Analyze"):
+    doc = nlp(text)
+    st.write("Entities Found:")
+    for ent in doc.ents:
+        st.write(f"{ent.text} ({ent.label_})")
+import streamlit as st
 import pandas as pd
 import pdfplumber
 import spacy
@@ -290,3 +306,4 @@ if st.button("✨ Analyze Resumes", use_container_width=True):
         
         # Reset the processing state after completion
         st.session_state.processing = False
+
